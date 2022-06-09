@@ -5,7 +5,20 @@ import { WiHumidity } from "react-icons/wi";
 import { BsFillSunFill } from "react-icons/bs";
 import { BsSunsetFill } from "react-icons/bs";
 
-function TemperatureAndDetails() {
+function TemperatureAndDetails({
+  weather: {
+    details,
+    icon,
+    temp,
+    feels_like,
+    temp_main,
+    temp_max,
+    humiditly,
+    sunrise,
+    sunset,
+    timezone,
+  },
+}) {
   return (
     <div>
       <div className="flex  items-center justify-center py-6 text-xl text-cyan-300 ">
@@ -34,26 +47,25 @@ function TemperatureAndDetails() {
         </div>
       </div>
       <div className="flex flex-row items-center justify-center space-x-2 text-white text-sm py-3">
-        <BsFillSunFill />
+        <BsFillSunFill size={25} />
         <p className="font-light">
-          Rise: <span className="font-medium ml-1">06:45 AM</span>
+          Rise:<span className="font-medium ml-1">06:45AM</span>
         </p>
         <p className="font-light">|</p>
-        <BsSunsetFill />
+        <BsSunsetFill size={25} />
         <p className="font-light">
-          set: <span className="font-medium ml-1">06:45 AM</span>
+          set:<span className="font-medium ml-1">06:45AM</span>
         </p>
         <p className="font-light">|</p>
-        <BsFillSunFill />
+        <BsFillSunFill size={25} />
         <p className="font-light">
-          High: <span className="font-medium ml-1">06:45 AM</span>
+          High:<span className="font-medium ml-1">06:45AM</span>
         </p>
         <p className="font-light">|</p>
-        <BsFillSunFill />
+        <BsFillSunFill size={25} />
         <p className="font-light">
-          Low: <span className="font-medium ml-1">06:45 AM</span>
+          Low:<span className="font-medium ml-1">06:45AM</span>
         </p>
-        <p className="font-light">|</p>
       </div>
     </div>
   );
