@@ -1,6 +1,7 @@
 import React from "react";
+import { iconUrlFromCode } from "./services/weatherService";
 
-function Forecost({ title }) {
+function Forecost({ title, items }) {
   return (
     <>
       <div className="flex items-center justify-start my-6">
@@ -8,60 +9,13 @@ function Forecost({ title }) {
       </div>
       <hr className="my-2"></hr>
       <div className="flex flex-row items-center justify-between text-white">
-        <div className="flex flex-col items-center justify-center">
-          <p className="font-light text-sm">04:30 PM</p>
-          <img
-            src="https://media.wired.co.uk/photos/606db762e46630a583ab32e2/1:1/w_750,h_750,c_limit/sunmeta.jpg"
-            alt="sun"
-            className="w-20"
-          />
-          <p className="font-light text-sm">22°</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="font-light text-sm">04:30 PM</p>
-          <img
-            src="https://media.wired.co.uk/photos/606db762e46630a583ab32e2/1:1/w_750,h_750,c_limit/sunmeta.jpg"
-            alt="sun"
-            className="w-20"
-          />
-          <p className="font-light text-sm">22°</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="font-light text-sm">04:30 PM</p>
-          <img
-            src="https://media.wired.co.uk/photos/606db762e46630a583ab32e2/1:1/w_750,h_750,c_limit/sunmeta.jpg"
-            alt="sun"
-            className="w-20"
-          />
-          <p className="font-light text-sm">22°</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="font-light text-sm">04:30 PM</p>
-          <img
-            src="https://media.wired.co.uk/photos/606db762e46630a583ab32e2/1:1/w_750,h_750,c_limit/sunmeta.jpg"
-            alt="sun"
-            className="w-20"
-          />
-          <p className="font-light text-sm">22°</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="font-light text-sm">04:30 PM</p>
-          <img
-            src="https://media.wired.co.uk/photos/606db762e46630a583ab32e2/1:1/w_750,h_750,c_limit/sunmeta.jpg"
-            alt="sun"
-            className="w-20"
-          />
-          <p className="font-light text-sm">22°</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <p className="font-light text-sm">04:30 PM</p>
-          <img
-            src="https://media.wired.co.uk/photos/606db762e46630a583ab32e2/1:1/w_750,h_750,c_limit/sunmeta.jpg"
-            alt="sun"
-            className="w-20"
-          />
-          <p className="font-light text-sm">22°</p>
-        </div>
+        {items.map((item) => (
+          <div className="flex flex-col items-center justify-center">
+            <p className="font-light text-sm">{item.title}</p>
+            <img src={iconUrlFromCode(item.icon)} alt="sun" className="w-20" />
+            <p className="font-light text-sm">{`${item.temp.toFixed()}°`}</p>
+          </div>
+        ))}
       </div>
     </>
   );

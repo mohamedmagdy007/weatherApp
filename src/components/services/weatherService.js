@@ -10,7 +10,7 @@ const getWeatherData = (infotype, searchParams) => {
 const FormattedWeather = (data) => {
   const {
     coord: { lat, lon },
-    main: { temp, feels_like, temp_main, temp_max, humiditly },
+    main: { temp, feels_like, temp_min, temp_max, humiditly },
     name,
     dt,
     sys: { country, sunrise, sunset },
@@ -23,7 +23,7 @@ const FormattedWeather = (data) => {
     lon,
     temp,
     feels_like,
-    temp_main,
+    temp_min,
     temp_max,
     humiditly,
     name,
@@ -45,7 +45,7 @@ const formatForecostWeather = (data) => {
   }));
   hourly = hourly.slice(1, 6).map((d) => ({
     title: formatToLocalTime(d.dt, timezone, "hh:mm a"),
-    temp: d.temp.day,
+    temp: d.temp,
     icon: d.weather[0].icon,
   }));
   return { timezone, daily, hourly };
@@ -67,7 +67,7 @@ const getFormattedWeatherData = async (searchParams) => {
 const formatToLocalTime = (
   secs,
   zone,
-  format = "cccc, dd lll yyyy |' Local time: 'hh:mm a"
+  format = "cccc, dd LLL yyyy |' Local time: 'hh:mm a"
 ) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
 const iconUrlFromCode = (code) =>
