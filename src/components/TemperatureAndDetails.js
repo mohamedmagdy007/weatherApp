@@ -4,7 +4,7 @@ import { GiWindTurbine } from "react-icons/gi";
 import { WiHumidity } from "react-icons/wi";
 import { BsFillSunFill } from "react-icons/bs";
 import { BsSunsetFill } from "react-icons/bs";
-import { formatToLocalTime, iconUrlFromCode } from "./services/weatherService";
+import { formatToLocalTime, iconUrlFromCode } from "../services/weatherService";
 
 function TemperatureAndDetails({
   weather: {
@@ -14,7 +14,7 @@ function TemperatureAndDetails({
     feels_like,
     temp_min,
     temp_max,
-    humiditly,
+    humidity,
     sunrise,
     sunset,
     timezone,
@@ -38,8 +38,7 @@ function TemperatureAndDetails({
           </div>
           <div className="flex font-light text-sm items-center justify-center">
             <WiHumidity size={25} className="mr-1" />
-            Humidity:{" "}
-            <span className="font-medium ml-1">{`${humiditly}%`}</span>
+            Humidity: <span className="font-medium ml-1">{`${humidity}%`}</span>
           </div>
           <div className="flex font-light text-sm items-center justify-center">
             <GiWindTurbine size={18} className="mr-1" />

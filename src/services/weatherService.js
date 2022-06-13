@@ -10,7 +10,7 @@ const getWeatherData = (infotype, searchParams) => {
 const FormattedWeather = (data) => {
   const {
     coord: { lat, lon },
-    main: { temp, feels_like, temp_min, temp_max, humiditly },
+    main: { temp, feels_like, temp_min, temp_max, humidity },
     name,
     dt,
     sys: { country, sunrise, sunset },
@@ -25,7 +25,7 @@ const FormattedWeather = (data) => {
     feels_like,
     temp_min,
     temp_max,
-    humiditly,
+    humidity,
     name,
     dt,
     country,

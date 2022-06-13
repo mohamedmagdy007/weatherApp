@@ -1,21 +1,23 @@
 import React, { useEffect, useState, useRef } from "react";
 import Forecost from "./components/Forecost";
 import Inputs from "./components/Inputs";
-import getFormattedWeatherData from "./components/services/weatherService";
+import getFormattedWeatherData from "./services/weatherService";
 import TemperatureAndDetails from "./components/TemperatureAndDetails";
 import TimeAndLocation from "./components/TimeAndLocation";
 import TopButtons from "./components/TopButtons";
 import { ToastContainer, toast } from "react-toastify";
+import usePrevState from "./hooks/usePrevState";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [query, setQuery] = useState({ q: "alexandria" });
-  const queryUseRef = useRef();
+  const prevQuery = usePrevState(query);
   const [units, setUnits] = useState("metric");
   const [weather, setWeather] = useState(null);
-  useEffect(() => {
-    queryUseRef.current = query;
-  });
-  const prevQuery = queryUseRef.current;
+  // useEffect(() => {
+  //   queryUseRef.current = query;
+  // });
+  // const prevQuery = queryUseRef.current;
+
   useEffect(() => {
     const message = query.q ? query.q : "current location.";
     toast.info("Fetching weather for" + message);
@@ -33,7 +35,7 @@ function App() {
       if (query) {
         fetchWeather();
       }
-    } else if (prevQuery !== queryUseRef) {
+    } else if (prevQuery !== query) {
       const clearSettimeout = setTimeout(() => {
         if (query) {
           fetchWeather();
@@ -56,7 +58,7 @@ function App() {
       className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br ${foramtBackground()} h-fit shadow-xl shadow-gray-400`}
     >
       <TopButtons setQuery={setQuery} />
-      <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+      <Inputs setQuery={setQuery} query={query} units={units} setUnits={setUnits} />
       {weather && (
         <>
           <TimeAndLocation weather={weather} />

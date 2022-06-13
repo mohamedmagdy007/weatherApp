@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import { BiSearch } from "react-icons/bi";
+import React from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
-import { toast } from "react-toastify";
+import Button from "./Button";
+import ButtonGroup from "./ButtonGroup";
 
 function Inputs({ setQuery, units, setUnits }) {
-  // const [city, setCity] = useState("");
-  // const handlerSearchClick = () => {
-  //   if (city !== "") setQuery({ q: city });
-  // };
   const handlerUnitsChange = (e) => {
     const selectedUnit = e.currentTarget.name;
     if (units !== selectedUnit) {
@@ -15,15 +11,11 @@ function Inputs({ setQuery, units, setUnits }) {
     }
   };
   const handlerSearchInput = (e) => {
-    console.log(e.currentTarget.value);
-    // setCity(e.currentTarget.value);
     setQuery({ q: e.currentTarget.value });
   };
   const handlerLocation = () => {
     if (navigator.geolocation) {
-      // toast.info("Fetching users Location.");
       navigator.geolocation.getCurrentPosition((position) => {
-        // toast.success("Location Fetched!");
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         setQuery({ lat, lon });
@@ -38,37 +30,30 @@ function Inputs({ setQuery, units, setUnits }) {
           type="text"
           placeholder="search for city.."
           onChange={handlerSearchInput}
-          // value={city}
           className="text-xl font-light p-2 w-full shadow-xl focus:outline-none placeholder:lowercase capitalize"
         />
-        {/* <BiSearch
-          size={25}
-          // onClick={handlerSearchClick}
-          className="text-white cursor-pointer transition ease-out hover:scale-125"
-        /> */}
         <MdOutlineLocationOn
           size={25}
           onClick={handlerLocation}
           className="text-white cursor-pointer transition ease-out hover:scale-125"
         />
       </div>
-      <div className="flex flex-row w-1/4 items-center justify-center">
-        <button
+      <ButtonGroup>
+        <Button
           name="metric"
-          onClick={handlerUnitsChange}
-          className="text-xl text-white font-light transition ease-out hover:scale-125"
+          handlerUnitsChange={handlerUnitsChange}
+          customClasses="text-xl text-white font-light transition duration-200 ease-out hover:scale-125 mr-2"
         >
           °C
-        </button>
-        <p className="text-xl text-white mx-1"> | </p>
-        <button
+        </Button>
+        <Button
           name="imperial"
-          onClick={handlerUnitsChange}
-          className="text-xl text-white font-light transition ease-out hover:scale-125"
+          handlerUnitsChange={handlerUnitsChange}
+          customClasses="text-xl text-white font-light transition duration-200 ease-out hover:scale-125"
         >
           °F
-        </button>
-      </div>
+        </Button>
+      </ButtonGroup>
     </div>
   );
 }
